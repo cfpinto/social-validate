@@ -1,0 +1,44 @@
+{
+    "name": "cfpinto/social-validate",
+    "description": "A url validation tool capable of validating and guessing the target social network",
+    "license": "GPL-3.0-or-later",
+    "keywords": [
+        "Laravel",
+        "Url",
+        "Validation",
+        "Facebook",
+        "Twitter",
+        "Instagram",
+        "Youtube"
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "fleshgrinder/url-validator": "dev-master",
+        "illuminate/support": "^5.5",
+        "illuminate/contracts": "^5.5"
+    },
+    "require-dev": {
+        "fzaninotto/faker": "^1.8",
+        "mockery/mockery": "^1.2",
+        "phpunit/phpunit": "^7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "SocialValidate\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SocialValidate\\Test\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SocialValidate\\SocialValidateServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
