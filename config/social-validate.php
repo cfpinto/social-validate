@@ -5,4 +5,5 @@ return [
     'instagram' => \SocialValidate\Validators\Instagram::class,
     'twitter'   => \SocialValidate\Validators\Twitter::class,
     'youtube'   => \SocialValidate\Validators\Youtube::class,
+    'twitch'   => \SocialValidate\Validators\Twitch::class,
 ];
