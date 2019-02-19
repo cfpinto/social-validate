@@ -17,7 +17,15 @@ class Youtube extends AbstractValidator
 {
 
     /** inline {@inheritdoc} */
-    protected $patterns = '~v=(?:[a-z0-9_-]+)~i';
+    protected $patterns = [
+        '~v=(?:[a-z0-9_-]+)~i',
+        '~www.youtube.com/(channel|user)/([^/]+)~i'
+    ];
+    
+    protected $patternMaps = [
+        ['type' => 'video', 'id' => 1],
+        ['type' => 'channel', 'id' => 2],
+    ];
     
     /** inline {@inheritdoc} */
     public function normalizeUrl(string $url):string 
@@ -26,6 +34,8 @@ class Youtube extends AbstractValidator
             return 'http://www.youtube.com/watch?v=' . $matches[1];
         }
         
-        return $url;
+        $parts = explode('?', $url);
+        
+        return $parts[0];
     }
 }
