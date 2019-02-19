@@ -11,14 +11,13 @@ namespace SocialValidate\Validators;
 
 class Twitch extends AbstractValidator
 {
-    protected $patterns = "~twitch\.tv/(videos)/([0-9]+)~i";
-
-    public function normalizeUrl(string $url): string
-    {
-        if (preg_match('~twitch\.tv/(videos)/([0-9]+)~i', $url, $matches)) {
-            return 'https://twitch.tv/' . $matches['1'] . '/' . $matches['2'];
-        }
-
-        return $url;
-    }
+    protected $patterns = [
+        "~twitch\.tv/videos/([0-9]+)~i",
+        "~twitch\.tv/([0-9]+)~i",
+    ];
+    
+    protected $patternMaps = [
+        ['type' => 'video', 'id' => 1],
+        ['type' => 'channel', 'id' => 1],
+    ];
 }

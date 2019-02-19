@@ -16,7 +16,15 @@ namespace SocialValidate\Validators;
 class Twitter extends AbstractValidator
 {
     /** inline {@inheritdoc} */
-    protected $patterns = '~twitter\.com/(?:[\w\d-_]+)/(?:status|moments)/(?:[0-9]+)~i';
+    protected $patterns = [
+        '~twitter\.com/([\w\d-_]+)/(status|moments)/([0-9]+)~i',
+        '~twitter\.com/([\w\d-_]+)~i',
+    ];
+    
+    protected $patternMaps = [
+        ['type' => 2, 'id' => 2],
+        ['type' => 'profile', 'id' => 1],
+    ];
 
     /** inline {@inheritdoc} */
     public function normalizeUrl(string $url): string

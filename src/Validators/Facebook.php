@@ -23,5 +23,19 @@ class Facebook extends AbstractValidator
         '~facebook\.com/media/set/?\?set=(?:[^/ ]+)~i',
         '~facebook\.com/(?:[^/]+)/videos/(?:[^/]+)/?~i',
         '~facebook\.com/video\.php\?(?:id|v)=(?:[^ ]+)~i',
+        '~facebook\.com/pages/([^/]+)(.*)~',
+        '~facebook\.com/([^/]+)(.*)~',
+    ];
+
+    protected $patternMaps = [
+        ['type' => 2, 'id' => 1],
+        ['type' => 'notes', 'id' => 3],
+        ['type' => 1, 'id' => 3],
+        ['type' => 1, 'id' => 2],
+        ['type' => 'media_set', 'id' => 1],
+        ['type' => 'videos', 'id' => 2],
+        ['type' => 'videos', 'id' => 2],
+        ['type' => 'pages', 'id' => 1],
+        ['type' => 'profile', 'id' => 1],
     ];
 }

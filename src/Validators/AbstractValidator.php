@@ -18,10 +18,14 @@ abstract class AbstractValidator implements ValidatorInterface
     protected $urlValidator;
 
     /**
-     * @var array|string
+     * @var array
      */
-    protected $patterns = '~will fail~';
+    protected $patterns = ['~will fail~'];
 
+    /**
+     * @var array
+     */
+    protected $patternMaps = ['fail', 0];
 
     /**
      * AbstractValidator constructor.
@@ -52,20 +56,48 @@ abstract class AbstractValidator implements ValidatorInterface
      */
     final public function isValid(string $url): bool
     {
+        return $this->split($url)->isValid;
+    }
+
+    /**
+     * @param string $url
+     *
+     * @return \stdClass
+     */
+    final public function split(string $url): \stdClass
+    {
         if (empty($this->patterns)) {
             throw new \RuntimeException('Invalid Regex validation pattern');
         }
 
-        if (is_array($this->patterns)) {
-            foreach ($this->patterns as $pattern) {
-                if (preg_match($pattern, $url)) {
-                    return true;
-                }
-            }
+        $result = new \stdClass();
+        $result->isValid = false;
+        $result->id = null;
+        $result->type = null;
 
-            return false;
-        } else {
-            return preg_match($this->patterns, $this->normalizeUrl($url));
+        $patterns = $this->patterns;
+        $patternMaps = $this->patternMaps;
+
+        if (!is_array($patterns)) {
+            $patterns = [$patterns];
+            $patternMaps = [$patternMaps];
         }
+
+        foreach ($patterns as $idx => $pattern) {
+            if (preg_match($pattern, $url, $matches)) {
+                $result->isValid = true;
+                $result->id = $matches[$patternMaps[$idx]['id']];
+                $result->type = is_numeric($patternMaps[$idx]['type']) ?
+                    $matches[$patternMaps[$idx]['type']] :
+                    $patternMaps[$idx]['type'];
+                
+                break;
+            }
+        }
+
+
+        dd($result);
+
+        return $result;
     }
 }

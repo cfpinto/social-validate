@@ -16,7 +16,17 @@ namespace SocialValidate\Validators;
 class Instagram extends AbstractValidator
 {
     /** inline {@inheritdoc} */
-    protected $patterns = '~/p/([A-Za-z0-9-_]+)/?$~i';
+    protected $patterns = [
+        '~instagram.com/p/([A-Za-z0-9-_.]+)/?$~i',
+        '~instagram.com/pages/([A-Za-z0-9-_.]+)/?$~i',
+        '~instagram.com/([A-Za-z0-9-_.]+)/?$~i',
+    ];
+    
+    protected $patternMaps = [
+        ['type' => 'post', 'id' => 1],
+        ['type' => 'page', 'id' => 1],
+        ['type' => 'page', 'id' => 1],
+    ];
 
     /** inline {@inheritdoc} */
     public function normalizeUrl(string $url): string
