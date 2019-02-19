@@ -95,9 +95,6 @@ abstract class AbstractValidator implements ValidatorInterface
             }
         }
 
-
-        dd($result);
-
         return $result;
     }
 }
