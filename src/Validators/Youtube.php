@@ -17,25 +17,25 @@ class Youtube extends AbstractValidator
 {
 
     /** inline {@inheritdoc} */
-    protected $patterns = [
-        '~v=(?:[a-z0-9_-]+)~i',
+    protected array $patterns = [
+        '~www.youtube.com/?\?v=([a-z0-9_-]+)~i',
         '~www.youtube.com/(channel|user)/([^/]+)~i'
     ];
-    
-    protected $patternMaps = [
+
+    protected array $patternMaps = [
         ['type' => 'video', 'id' => 1],
-        ['type' => 'channel', 'id' => 2],
+        ['type' => 1, 'id' => 2],
     ];
-    
+
     /** inline {@inheritdoc} */
-    public function normalizeUrl(string $url):string 
+    public function normalizeUrl(string $url):string
     {
         if (preg_match('~(?:v=|youtu\.be/|youtube\.com/embed/)([a-z0-9_-]+)~i', $url, $matches)) {
-            return 'http://www.youtube.com/watch?v=' . $matches[1];
+            return 'https://www.youtube.com/watch?v=' . $matches[1];
         }
-        
+
         $parts = explode('?', $url);
-        
+
         return $parts[0];
     }
 }

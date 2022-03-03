@@ -12,7 +12,8 @@
         "Youtube"
     ],
     "require": {
-        "php": ">=7.1.0",
+        "php": ">=7.4.0",
+        "ext-json": "*",
         "fleshgrinder/url-validator": "dev-master",
         "illuminate/support": "^5.5",
         "illuminate/contracts": "^5.5"
@@ -20,7 +21,9 @@
     "require-dev": {
         "fzaninotto/faker": "^1.8",
         "mockery/mockery": "^1.2",
-        "phpunit/phpunit": "^7.4"
+        "phpunit/phpunit": "^9",
+        "spatie/phpunit-watcher": "^1.23",
+        "ramsey/uuid": "^4.2"
     },
     "autoload": {
         "psr-4": {
@@ -40,5 +43,11 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "scripts": {
+        "test:watch": [
+            "Composer\\Config::disableProcessTimeout",
+            "phpunit-watcher watch < /dev/tty"
+        ]
+    }
 }
