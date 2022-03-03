@@ -11,7 +11,13 @@ abstract class AbstractValidatorTest extends TestCase
 
     /**
      * @dataProvider isValidProvider
-     * @covers
+     * @covers \SocialValidate\Validators\AbstractValidator
+     * @covers \SocialValidate\Validators\Facebook
+     * @covers \SocialValidate\Validators\Instagram
+     * @covers \SocialValidate\Validators\Twitch
+     * @covers \SocialValidate\Validators\Twitter
+     * @covers \SocialValidate\Validators\Youtube
+     * @covers \SocialValidate\Validators\LinkType
      * @param string $url
      * @param bool $expectedValue
      * @return void
@@ -23,7 +29,13 @@ abstract class AbstractValidatorTest extends TestCase
 
     /**
      * @dataProvider splitProvider
-     * @covers
+     * @covers \SocialValidate\Validators\AbstractValidator
+     * @covers \SocialValidate\Validators\Facebook
+     * @covers \SocialValidate\Validators\Instagram
+     * @covers \SocialValidate\Validators\Twitch
+     * @covers \SocialValidate\Validators\Twitter
+     * @covers \SocialValidate\Validators\Youtube
+     * @covers \SocialValidate\Validators\LinkType
      * @param string $url
      * @param string $expectedJson
      * @return void
@@ -35,7 +47,12 @@ abstract class AbstractValidatorTest extends TestCase
 
     /**
      * @dataProvider normalizeUrlProvider
-     * @covers
+     * @covers \SocialValidate\Validators\AbstractValidator
+     * @covers \SocialValidate\Validators\Facebook
+     * @covers \SocialValidate\Validators\Instagram
+     * @covers \SocialValidate\Validators\Twitch
+     * @covers \SocialValidate\Validators\Twitter
+     * @covers \SocialValidate\Validators\Youtube
      * @param $url
      * @param $expectedUrl
      * @return void

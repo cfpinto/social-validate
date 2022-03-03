@@ -8,13 +8,13 @@ use SocialValidate\Validators\Facebook;
 use SocialValidate\Validators\Instagram;
 use SocialValidate\Validators\Twitch;
 use SocialValidate\Validators\Twitter;
-use SocialValidate\Validators\ValidatorInterface;
 use SocialValidate\Validators\Youtube;
 
 class ValidatorTest extends TestCase
 {
     /**
-     * @covers
+     * @covers \SocialValidate\Validator
+     * @covers \SocialValidate\Validators\AbstractValidator
      * @return void
      */
     public function testItCanGetAnExistingDriver()
@@ -25,7 +25,7 @@ class ValidatorTest extends TestCase
     }
 
     /**
-     * @covers
+     * @covers \SocialValidate\Validator
      * @return void
      */
     public function testItThrowsExceptionWhenDriverDoesNotExists()
@@ -37,7 +37,9 @@ class ValidatorTest extends TestCase
     }
 
     /**
-     * @covers
+     * @covers \SocialValidate\Validator
+     * @covers \SocialValidate\Validators\AbstractValidator
+     * @covers \SocialValidate\Validators\LinkType
      * @dataProvider itDetectsCorrectDriverDataProvider
      * @return void
      */

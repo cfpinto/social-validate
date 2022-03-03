@@ -66,18 +66,9 @@ abstract class AbstractValidator implements ValidatorInterface
      */
     final public function split(string $url): LinkType
     {
-        if (empty($this->patterns)) {
-            throw new \RuntimeException('Invalid Regex validation pattern');
-        }
-
         $result = new LinkType();
         $patterns = $this->patterns;
         $patternMaps = $this->patternMaps;
-
-        if (!is_array($patterns)) {
-            $patterns = [$patterns];
-            $patternMaps = [$patternMaps];
-        }
 
         foreach ($patterns as $idx => $pattern) {
             if (preg_match($pattern, $url, $matches)) {
