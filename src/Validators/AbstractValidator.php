@@ -15,17 +15,17 @@ abstract class AbstractValidator implements ValidatorInterface
     /**
      * @var URL
      */
-    protected $urlValidator;
+    protected URL $urlValidator;
 
     /**
      * @var array
      */
-    protected $patterns = ['~will fail~'];
+    protected array $patterns = ['~will fail~'];
 
     /**
      * @var array
      */
-    protected $patternMaps = ['fail', 0];
+    protected array $patternMaps = ['fail', 0];
 
     /**
      * AbstractValidator constructor.
@@ -62,26 +62,13 @@ abstract class AbstractValidator implements ValidatorInterface
     /**
      * @param string $url
      *
-     * @return \stdClass
+     * @return LinkType
      */
-    final public function split(string $url): \stdClass
+    final public function split(string $url): LinkType
     {
-        if (empty($this->patterns)) {
-            throw new \RuntimeException('Invalid Regex validation pattern');
-        }
-
-        $result = new \stdClass();
-        $result->isValid = false;
-        $result->id = null;
-        $result->type = null;
-
+        $result = new LinkType();
         $patterns = $this->patterns;
         $patternMaps = $this->patternMaps;
-
-        if (!is_array($patterns)) {
-            $patterns = [$patterns];
-            $patternMaps = [$patternMaps];
-        }
 
         foreach ($patterns as $idx => $pattern) {
             if (preg_match($pattern, $url, $matches)) {
@@ -90,7 +77,7 @@ abstract class AbstractValidator implements ValidatorInterface
                 $result->type = is_numeric($patternMaps[$idx]['type']) ?
                     $matches[$patternMaps[$idx]['type']] :
                     $patternMaps[$idx]['type'];
-                
+
                 break;
             }
         }

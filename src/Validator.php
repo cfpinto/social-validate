@@ -17,14 +17,14 @@ use SocialValidate\Validators\ValidatorInterface;
 class Validator
 {
     /**
-     * @var array 
+     * @var array
      */
-    protected $drivers = [];
+    protected array $drivers = [];
 
     /**
-     * @var ValidatorInterface[] 
+     * @var ValidatorInterface[]
      */
-    protected $instances = [];
+    protected array $instances = [];
 
     /**
      * Validator constructor.
@@ -35,7 +35,7 @@ class Validator
     {
         $this->drivers = $drivers;
     }
-    
+
     /**
      * @param string      $driver
      *
@@ -46,11 +46,11 @@ class Validator
         if (!isset($this->drivers[$driver])) {
             throw new \RuntimeException(sprintf('Invalid driver %s.', $driver));
         }
-        
+
         if (empty($this->instances[$driver])) {
             $this->instances[$driver] = new $this->drivers[$driver]();
         }
-        
+
         return $this->instances[$driver];
     }
 
@@ -59,18 +59,18 @@ class Validator
      *
      * @return null|string
      */
-    public function guess(string $url): ?string 
+    public function guess(string $url): ?string
     {
         foreach ($this->drivers as $driver => $class) {
             if (empty($this->instances[$driver])) {
                 $this->instances[$driver] = new $class();
             }
-            
+
             if ($this->instances[$driver]->isValid($url)) {
                 return $driver;
             }
         }
-        
+
         return null;
     }
 }
