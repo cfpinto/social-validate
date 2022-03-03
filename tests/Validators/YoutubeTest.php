@@ -3,11 +3,20 @@
 namespace SocialValidate\Test\Validators;
 
 use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidFactory;
 use SocialValidate\Validators\LinkType;
 use SocialValidate\Validators\Youtube;
 
 class YoutubeTest extends AbstractValidatorTest
 {
+    protected UuidFactory $uuidFactory;
+
+    public function __construct(?string $name = null, array $data = [], $dataName = '')
+    {
+        parent::__construct($name, $data, $dataName);
+        $this->uuidFactory = new UuidFactory();
+    }
+
     protected function setUp(): void
     {
         $this->validator = new Youtube();
@@ -17,10 +26,10 @@ class YoutubeTest extends AbstractValidatorTest
     {
         return [
             ['https://www.youtube.com', false],
-            ['https://www.youtube.com?v=' . Uuid::uuid4(), true],
-            ['https://www.youtube.com/channel/' . Uuid::uuid4(), true],
+            ['https://www.youtube.com?v=' . $this->uuidFactory->uuid4(), true],
+            ['https://www.youtube.com/channel/' . $this->uuidFactory->uuid4(), true],
             ['https://www.youtube.com/channel/channel-name', true],
-            ['https://www.youtube.com/user/' . Uuid::uuid4(), true],
+            ['https://www.youtube.com/user/' . $this->uuidFactory->uuid4(), true],
             ['https://www.youtube.com/user/user-name', true],
         ];
     }

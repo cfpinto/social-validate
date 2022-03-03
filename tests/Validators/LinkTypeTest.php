@@ -14,9 +14,9 @@ class LinkTypeTest extends TestCase
      * @covers \SocialValidate\Validators\LinkType::toJson
      * @return void
      */
-    public function testConstructor(bool $isValid, ?string $id, ?string $type, $expected)
+    public function testConstructor(bool $isValid, ?string $entityId, ?string $type, $expected)
     {
-        $linkType = new LinkType($isValid, $id, $type);
+        $linkType = new LinkType($isValid, $entityId, $type);
 
         $this->assertEquals($expected, $linkType->toJson());
     }

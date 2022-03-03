@@ -3,11 +3,20 @@
 namespace SocialValidate\Test\Validators;
 
 use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidFactory;
 use SocialValidate\Validators\Instagram;
 use SocialValidate\Validators\LinkType;
 
 class InstagramTest extends AbstractValidatorTest
 {
+    protected UuidFactory $uuidFactory;
+
+    public function __construct(?string $name = null, array $data = [], $dataName = '')
+    {
+        parent::__construct($name, $data, $dataName);
+        $this->uuidFactory = new UuidFactory();
+    }
+
     protected function setUp(): void
     {
         $this->validator = new Instagram();
@@ -17,9 +26,9 @@ class InstagramTest extends AbstractValidatorTest
     {
         return [
             ['https://instagram.com/', false],
-            ['https://instagram.com/p/' . Uuid::uuid4(), true],
-            ['https://instagram.com/pages/' . Uuid::uuid4(), true],
-            ['https://instagram.com/' . Uuid::uuid4(), true],
+            ['https://instagram.com/p/' . $this->uuidFactory->uuid4(), true],
+            ['https://instagram.com/pages/' . $this->uuidFactory->uuid4(), true],
+            ['https://instagram.com/' . $this->uuidFactory->uuid4(), true],
         ];
     }
 
