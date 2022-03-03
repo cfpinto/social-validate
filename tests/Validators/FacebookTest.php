@@ -3,11 +3,20 @@
 namespace SocialValidate\Test\Validators;
 
 use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidFactory;
 use SocialValidate\Validators\Facebook;
 use SocialValidate\Validators\LinkType;
 
 class FacebookTest extends AbstractValidatorTest
 {
+    protected UuidFactory $uuidFactory;
+
+    public function __construct(?string $name = null, array $data = [], $dataName = '')
+    {
+        parent::__construct($name, $data, $dataName);
+        $this->uuidFactory = new UuidFactory();
+    }
+
     protected function setUp(): void
     {
         $this->validator = new Facebook();
@@ -17,22 +26,22 @@ class FacebookTest extends AbstractValidatorTest
     {
         return [
             ['https://facebook.com', false],
-            ['https://facebook.com/' . Uuid::uuid4() . '/posts/' . Uuid::uuid4(), true],
-            ['https://facebook.com/' . Uuid::uuid4() . '/activity/' . Uuid::uuid4(), true],
-            ['https://facebook.com/' . Uuid::uuid4() . '/photos/' . Uuid::uuid4(), true],
-            ['https://facebook.com/notes/' . Uuid::uuid4() . '/' . Uuid::uuid4() . '/' . Uuid::uuid4() . '/', true],
-            ['https://facebook.com/photo.php?fbid=' . Uuid::uuid4(), true],
-            ['https://facebook.com/photo.php?story_fbid=' . Uuid::uuid4(), true],
-            ['https://facebook.com/permalink.php?fbid=' . Uuid::uuid4(), true],
-            ['https://facebook.com/permalink.php?story_fbid=' . Uuid::uuid4(), true],
-            ['https://facebook.com/photos/' . Uuid::uuid4(), true],
-            ['https://facebook.com/questions/' . Uuid::uuid4(), true],
-            ['https://facebook.com/media/set?set=' . Uuid::uuid4(), true],
-            ['https://facebook.com/'. Uuid::uuid4() . '/videos/' . Uuid::uuid4(), true],
-            ['https://facebook.com/video.php?id=' . Uuid::uuid4(), true],
-            ['https://facebook.com/video.php?v=' . Uuid::uuid4(), true],
-            ['https://facebook.com/pages/' . Uuid::uuid4(), true],
-            ['https://facebook.com/' . Uuid::uuid4(), true],
+            ['https://facebook.com/' . $this->uuidFactory->uuid4() . '/posts/' . $this->uuidFactory->uuid4(), true],
+            ['https://facebook.com/' . $this->uuidFactory->uuid4() . '/activity/' . $this->uuidFactory->uuid4(), true],
+            ['https://facebook.com/' . $this->uuidFactory->uuid4() . '/photos/' . $this->uuidFactory->uuid4(), true],
+            ['https://facebook.com/notes/' . $this->uuidFactory->uuid4() . '/' . $this->uuidFactory->uuid4() . '/' . $this->uuidFactory->uuid4() . '/', true],
+            ['https://facebook.com/photo.php?fbid=' . $this->uuidFactory->uuid4(), true],
+            ['https://facebook.com/photo.php?story_fbid=' . $this->uuidFactory->uuid4(), true],
+            ['https://facebook.com/permalink.php?fbid=' . $this->uuidFactory->uuid4(), true],
+            ['https://facebook.com/permalink.php?story_fbid=' . $this->uuidFactory->uuid4(), true],
+            ['https://facebook.com/photos/' . $this->uuidFactory->uuid4(), true],
+            ['https://facebook.com/questions/' . $this->uuidFactory->uuid4(), true],
+            ['https://facebook.com/media/set?set=' . $this->uuidFactory->uuid4(), true],
+            ['https://facebook.com/'. $this->uuidFactory->uuid4() . '/videos/' . $this->uuidFactory->uuid4(), true],
+            ['https://facebook.com/video.php?id=' . $this->uuidFactory->uuid4(), true],
+            ['https://facebook.com/video.php?v=' . $this->uuidFactory->uuid4(), true],
+            ['https://facebook.com/pages/' . $this->uuidFactory->uuid4(), true],
+            ['https://facebook.com/' . $this->uuidFactory->uuid4(), true],
         ];
     }
 
